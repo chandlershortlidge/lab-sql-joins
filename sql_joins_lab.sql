@@ -12,6 +12,18 @@ select
 FROM film_category as fc
 JOIN category as c
 ON fc.category_id = c.category_id
-group by c.name
+group by c.name;
 
--- Error Code: 1054. Unknown column 'film_category.category_id' in 'on clause'
+-- 2. Retrieve the store ID, city, and country for each store.
+
+SELECT
+	s.store_id as "Store ID",
+    cou.country as "Country", 
+    c.city as "City"
+from store as s
+join address as a on s.address_id = a.address_id
+join city as c on a.city_id = c.city_id
+join country as cou on c.country_id = cou.country_id
+
+      
+

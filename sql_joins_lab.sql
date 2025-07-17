@@ -45,7 +45,7 @@ join film as f on fc.film_id = f.film_id
 group by c.name;
 
 -- bonus: 
--- 1. Identify the film categories with the longest average running time.
+-- Identify the film categories with the longest average running time.
 select
 	c.name as "Category Name", 
     floor(avg(f.length)) as Average_Length
@@ -57,7 +57,7 @@ order by Average_Length desc
 limit 5;
 
 
--- 2. Display the top 10 most frequently rented movies in descending order.
+-- Display the top 10 most frequently rented movies in descending order.
 select 
 	f.title,
     count(r.rental_date) as Rate_Rented
@@ -66,13 +66,18 @@ join inventory as i on r.inventory_id = i.inventory_id
 join film as f on i.film_id = f.film_id
 group by f.title
 order by Rate_Rented desc
-limit 10
+limit 10;
 
+-- Determine if "Academy Dinosaur" can be rented from Store 1.
 
-
-
--- EError Code: 1054. Unknown column 'i.rental_id' in 'on clause'
-
+select
+	f.title, 
+	s.store_id 
+from store as s
+join inventory as i on s.store_id = i.store_id
+join film as f on i.film_id = f.film_id
+where f.title = "Academy Dinosaur"
+	and s.store_id = 1
 
 
 
